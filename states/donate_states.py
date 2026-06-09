@@ -1,8 +1,5 @@
-from aiogram.fsm.state import State
-from aiogram.fsm.state import StatesGroup
-
+from aiogram.fsm.state import State, StatesGroup
 
 class DonateWizard(StatesGroup):
-    donation_type = State()
-    telegram_usage = State()
-    coffee_amount = State()
+donation_type = State()
+telegram_usage = State()
