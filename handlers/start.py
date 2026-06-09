@@ -6,25 +6,20 @@ from keyboards.donate_kb import start_kb
 
 router = Router()
 
-
 @router.message(CommandStart())
 async def start(message: Message):
 
-    await message.answer(
-        """
-🧭 Привет!
+```
+await message.answer(
+    """
+```
 
-Я Donate Wizard.
+🧭 Donate Wizard
 
-Помогу выбрать лучший способ
-поддержать автора за несколько секунд.
+Помогу подобрать самый удобный
+способ поддержки автора.
 
-Команды:
-
-/donate
-/calc
-/support
-/why
+Нажмите кнопку ниже.
 """,
-        reply_markup=start_kb
-    )
+reply_markup=start_kb
+)
