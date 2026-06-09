@@ -89,7 +89,7 @@ state: FSMContext
 ):
 await callback.message.edit_text(
 "📱 Пользуетесь Telegram ежедневно?",
-reply_markup=telegram_kb
+reply_markup=restart_kb
 )
 
 ```
