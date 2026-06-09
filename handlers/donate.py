@@ -26,9 +26,9 @@ async def donate(
 message: Message,
 state: FSMContext
 ):
-await message.answer(
+await callback.message.edit_text(
 "🧭 Какой вариант вам ближе?",
-reply_markup=donation_type_kb
+reply_markup=restart_kb
 )
 
 await state.set_state(
@@ -42,7 +42,7 @@ state: FSMContext
 ):
 await callback.message.edit_text(
 "🧭 Какой вариант вам ближе?",
-reply_markup=donation_type_kb
+reply_markup=restart_kb
 )
 
 await state.set_state(
@@ -82,7 +82,7 @@ state: FSMContext
 ):
 await callback.message.edit_text(
 "📱 Пользуетесь Telegram ежедневно?",
-reply_markup=telegram_kb
+reply_markup=restart_kb
 )
 
 await state.set_state(
@@ -106,7 +106,8 @@ f"""
 Удобный вариант для разового доната.
 
 {PAYPAL_LINK}
-"""
+""",
+reply_markup=restart_kb
 )
 
 await callback.answer()
@@ -127,7 +128,8 @@ f"""
 Самый быстрый способ поддержки.
 
 {STARS_LINK}
-"""
+""",
+reply_markup=restart_kb
 )
 
 await callback.answer()
