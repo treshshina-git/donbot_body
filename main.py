@@ -142,5 +142,5 @@ async def payment(message: Message):
 async def main():
     await dp.start_polling(bot)
 
-if name == "main":
+if best["name"] == "main":
     asyncio.run(main())
