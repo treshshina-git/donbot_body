@@ -26,30 +26,34 @@ async def donate(
 message: Message,
 state: FSMContext
 ):
-await callback.answer(
+await message.answer(
 "🧭 Какой вариант вам ближе?",
-reply_markup=restart_kb
+reply_markup=donation_type_kb
 )
 
+```
 await state.set_state(
     DonateWizard.donation_type
 )
+```
 
 @router.callback_query(F.data == "start_donate")
 async def start_button(
 callback: CallbackQuery,
 state: FSMContext
 ):
-await callback.answer(
+await callback.message.edit_text(
 "🧭 Какой вариант вам ближе?",
-reply_markup=restart_kb
+reply_markup=donation_type_kb
 )
 
+```
 await state.set_state(
     DonateWizard.donation_type
 )
 
 await callback.answer()
+```
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -66,11 +70,14 @@ f"""
 Лучший вариант для регулярной поддержки.
 
 {PATREON_LINK}
-"""
+""",
+reply_markup=restart_kb
 )
 
+```
 await callback.answer()
 await state.clear()
+```
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -82,14 +89,16 @@ state: FSMContext
 ):
 await callback.message.edit_text(
 "📱 Пользуетесь Telegram ежедневно?",
-reply_markup=restart_kb
+reply_markup=telegram_kb
 )
 
+```
 await state.set_state(
     DonateWizard.telegram_usage
 )
 
 await callback.answer()
+```
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -110,8 +119,10 @@ f"""
 reply_markup=restart_kb
 )
 
+```
 await callback.answer()
 await state.clear()
+```
 
 @router.callback_query(
 DonateWizard.telegram_usage,
@@ -132,8 +143,10 @@ f"""
 reply_markup=restart_kb
 )
 
+```
 await callback.answer()
 await state.clear()
+```
 
 @router.callback_query(
 DonateWizard.telegram_usage,
@@ -154,5 +167,7 @@ f"""
 reply_markup=restart_kb
 )
 
+```
 await callback.answer()
 await state.clear()
+```
