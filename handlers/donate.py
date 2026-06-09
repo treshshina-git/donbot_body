@@ -40,7 +40,7 @@ async def start_button(
 callback: CallbackQuery,
 state: FSMContext
 ):
-await callback.message.edit_text(
+await callback.answer(
 "🧭 Какой вариант вам ближе?",
 reply_markup=restart_kb
 )
