@@ -1,17 +1,17 @@
 from aiogram.types import (
-InlineKeyboardMarkup,
-InlineKeyboardButton
+    InlineKeyboardMarkup,
+    InlineKeyboardButton
 )
 
 start_kb = InlineKeyboardMarkup(
-inline_keyboard=[
-[
-InlineKeyboardButton(
-text="🚀 Подобрать способ",
-callback_data="start_donate"
-)
-]
-]
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(
+                text="🚀 Подобрать способ",
+                callback_data="start_donate"
+            )
+        ]
+    ]
 )
 
 donation_type_kb = InlineKeyboardMarkup(
