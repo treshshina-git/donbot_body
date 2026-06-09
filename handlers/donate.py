@@ -26,7 +26,7 @@ state: FSMContext
 ):
 await message.answer(
 "🧭 Какой вариант вам ближе?",
-reply_markup=donation_type_kb
+reply_markup=reply_kb
 )
 
 ```
@@ -44,7 +44,7 @@ state: FSMContext
 ):
 await callback.message.edit_text(
 "🧭 Какой вариант вам ближе?",
-reply_markup=donation_type_kb
+reply_markup=reply_kb
 )
 
 ```
@@ -71,7 +71,7 @@ f"""
 
 {PATREON_LINK}
 """,
-reply_markup=None
+reply_markup=reply_kb
 )
 
 ```
@@ -116,7 +116,7 @@ f"""
 
 {PAYPAL_LINK}
 """,
-reply_markup=None
+reply_markup=reply_kb
 )
 
 ```
@@ -140,7 +140,8 @@ f"""
 
 {STARS_LINK}
 """
-)
+,
+    reply_markup=restart_kb)
 
 ```
 await callback.answer()
@@ -163,7 +164,8 @@ f"""
 
 {PAYPAL_LINK}
 """
-)
+,
+    reply_markup=restart_kb)
 
 ```
 await callback.answer()
