@@ -85,7 +85,6 @@ await callback.message.edit_text(
 reply_markup=telegram_kb
 )
 
-
 await state.set_state(
     DonateWizard.telegram_usage
 )
@@ -155,4 +154,3 @@ reply_markup=restart_kb
 
 await callback.answer()
 await state.clear()
-
