@@ -1,7 +1,7 @@
 {
-  "kofi": {
-    "name": "Ko-fi",
-    "link": "https://ko-fi.com/YOUR_PAGE",
+  "donationalerts": {
+    "name": "Donationalerts",
+    "link": "https://dalink.to/treshina",
     "countries": ["Germany", "USA", "Other"],
     "donate": true,
     "subscription": true,
@@ -10,9 +10,9 @@
     "stars": false
   },
 
-  "patreon": {
-    "name": "Patreon",
-    "link": "https://patreon.com/YOUR_PAGE",
+  "boosty": {
+    "name": "Boosty",
+    "link": "https://boosty.to/treshina",
     "countries": ["Germany", "USA", "Other"],
     "donate": false,
     "subscription": true,
@@ -21,9 +21,9 @@
     "stars": false
   },
 
-  "telegram_stars": {
-    "name": "Telegram Stars",
-    "link": "https://t.me/YOUR_CHANNEL",
+  "donatty": {
+    "name": "Donatty",
+    "link": "https://donatty.com/treshina",
     "countries": ["Germany", "USA", "Russia", "Other"],
     "donate": true,
     "subscription": false,
