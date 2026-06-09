@@ -1,3 +1,4 @@
+python
 import json
 import os
 import asyncio
@@ -123,7 +124,7 @@ async def payment(message: Message):
 
         if payment_type == "card" and service["card"]:
             score += 3
-[09.06.2026 10:07] TeppopucT: if payment_type == "paypal" and service["paypal"]:
+        if payment_type == "paypal" and service["paypal"]:
             score += 3
 
         if payment_type == "stars" and service["stars"]:
