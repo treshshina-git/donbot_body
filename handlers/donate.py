@@ -1,14 +1,14 @@
-# handlers/donate.py
-
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
 from states.donate_states import DonateWizard
+
 from keyboards.donate_kb import (
 donation_type_kb,
-telegram_kb
+telegram_kb,
+restart_kb
 )
 
 from config import (
@@ -26,7 +26,7 @@ state: FSMContext
 ):
 await message.answer(
 "🧭 Какой вариант вам ближе?",
-reply_markup=reply_kb
+reply_markup=donation_type_kb
 )
 
 ```
@@ -35,16 +35,14 @@ await state.set_state(
 )
 ```
 
-@router.callback_query(
-F.data == "start_donate"
-)
+@router.callback_query(F.data == "start_donate")
 async def start_button(
 callback: CallbackQuery,
 state: FSMContext
 ):
 await callback.message.edit_text(
 "🧭 Какой вариант вам ближе?",
-reply_markup=reply_kb
+reply_markup=donation_type_kb
 )
 
 ```
@@ -71,7 +69,7 @@ f"""
 
 {PATREON_LINK}
 """,
-reply_markup=reply_kb
+reply_markup=restart_kb
 )
 
 ```
@@ -116,7 +114,7 @@ f"""
 
 {PAYPAL_LINK}
 """,
-reply_markup=reply_kb
+reply_markup=restart_kb
 )
 
 ```
@@ -139,9 +137,9 @@ f"""
 Самый быстрый способ поддержки.
 
 {STARS_LINK}
-"""
-,
-    reply_markup=restart_kb)
+""",
+reply_markup=restart_kb
+)
 
 ```
 await callback.answer()
@@ -163,9 +161,9 @@ f"""
 Удобный вариант для разового доната.
 
 {PAYPAL_LINK}
-"""
-,
-    reply_markup=restart_kb)
+""",
+reply_markup=restart_kb
+)
 
 ```
 await callback.answer()
