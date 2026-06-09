@@ -1,6 +1,16 @@
 from aiogram.types import InlineKeyboardMarkup
 from aiogram.types import InlineKeyboardButton
 
+restart_kb = InlineKeyboardMarkup(
+inline_keyboard=[
+[
+InlineKeyboardButton(
+text="🔄 Начать заново",
+callback_data="start_donate"
+)
+]
+]
+)
 
 start_kb = InlineKeyboardMarkup(
     inline_keyboard=[
