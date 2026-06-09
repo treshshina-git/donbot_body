@@ -44,7 +44,7 @@ state: FSMContext
 ):
 await callback.message.edit_text(
 "🧭 Какой вариант вам ближе?",
-reply_markup=donation_type_kb
+ reply_markup=restart_kb
 )
 
 ```
