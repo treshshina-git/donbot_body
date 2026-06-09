@@ -1,3 +1,5 @@
+# handlers/donate.py
+
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
@@ -29,11 +31,11 @@ await message.answer(
 reply_markup=donation_type_kb
 )
 
-```
+
 await state.set_state(
     DonateWizard.donation_type
 )
-```
+
 
 @router.callback_query(F.data == "start_donate")
 async def start_button(
@@ -45,13 +47,13 @@ await callback.message.edit_text(
 reply_markup=donation_type_kb
 )
 
-```
+
 await state.set_state(
     DonateWizard.donation_type
 )
 
 await callback.answer()
-```
+
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -72,10 +74,10 @@ f"""
 reply_markup=restart_kb
 )
 
-```
+
 await callback.answer()
 await state.clear()
-```
+
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -90,13 +92,13 @@ await callback.message.edit_text(
 reply_markup=telegram_kb
 )
 
-```
+
 await state.set_state(
     DonateWizard.telegram_usage
 )
 
 await callback.answer()
-```
+
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -117,10 +119,10 @@ f"""
 reply_markup=restart_kb
 )
 
-```
+
 await callback.answer()
 await state.clear()
-```
+
 
 @router.callback_query(
 DonateWizard.telegram_usage,
@@ -141,10 +143,10 @@ f"""
 reply_markup=restart_kb
 )
 
-```
+
 await callback.answer()
 await state.clear()
-```
+
 
 @router.callback_query(
 DonateWizard.telegram_usage,
@@ -165,7 +167,7 @@ f"""
 reply_markup=restart_kb
 )
 
-```
+
 await callback.answer()
 await state.clear()
-```
+
