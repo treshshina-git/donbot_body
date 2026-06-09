@@ -71,7 +71,7 @@ f"""
 
 {PATREON_LINK}
 """,
-reply_markup=None
+reply_markup=restart_kb
 )
 
 ```
@@ -116,7 +116,7 @@ f"""
 
 {PAYPAL_LINK}
 """,
-reply_markup=None
+reply_markup=restart_kb
 )
 
 ```
