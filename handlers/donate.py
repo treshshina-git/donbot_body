@@ -31,11 +31,9 @@ await message.answer(
 reply_markup=donation_type_kb
 )
 
-
 await state.set_state(
     DonateWizard.donation_type
 )
-
 
 @router.callback_query(F.data == "start_donate")
 async def start_button(
@@ -47,13 +45,11 @@ await callback.message.edit_text(
 reply_markup=donation_type_kb
 )
 
-
 await state.set_state(
     DonateWizard.donation_type
 )
 
 await callback.answer()
-
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -70,14 +66,11 @@ f"""
 Лучший вариант для регулярной поддержки.
 
 {PATREON_LINK}
-""",
-reply_markup=restart_kb
+"""
 )
-
 
 await callback.answer()
 await state.clear()
-
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -99,7 +92,6 @@ await state.set_state(
 
 await callback.answer()
 
-
 @router.callback_query(
 DonateWizard.donation_type,
 F.data == "thanks"
@@ -115,14 +107,11 @@ f"""
 Удобный вариант для разового доната.
 
 {PAYPAL_LINK}
-""",
-reply_markup=restart_kb
+"""
 )
-
 
 await callback.answer()
 await state.clear()
-
 
 @router.callback_query(
 DonateWizard.telegram_usage,
@@ -139,14 +128,11 @@ f"""
 Самый быстрый способ поддержки.
 
 {STARS_LINK}
-""",
-reply_markup=restart_kb
+"""
 )
-
 
 await callback.answer()
 await state.clear()
-
 
 @router.callback_query(
 DonateWizard.telegram_usage,
@@ -166,7 +152,6 @@ f"""
 """,
 reply_markup=restart_kb
 )
-
 
 await callback.answer()
 await state.clear()
