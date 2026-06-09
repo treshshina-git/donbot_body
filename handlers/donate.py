@@ -1,8 +1,7 @@
-# handlers/donate.py
-
 from aiogram import Router, F
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import CallbackQuery
 from aiogram.filters import Command
+from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 
 from states.donate_states import DonateWizard
@@ -31,12 +30,14 @@ await message.answer(
 reply_markup=donation_type_kb
 )
 
+```
 await state.set_state(
     DonateWizard.donation_type
 )
+```
 
 @router.callback_query(F.data == "start_donate")
-async def start_button(
+async def start_donate(
 callback: CallbackQuery,
 state: FSMContext
 ):
@@ -45,11 +46,13 @@ await callback.message.edit_text(
 reply_markup=donation_type_kb
 )
 
+```
 await state.set_state(
     DonateWizard.donation_type
 )
 
 await callback.answer()
+```
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -63,14 +66,17 @@ await callback.message.edit_text(
 f"""
 ❤️ Patreon
 
-Лучший вариант для регулярной поддержки.
+Подходит для регулярной поддержки.
 
-{PATREON_LINK}
+🔗 {PATREON_LINK}
 """,
 reply_markup=restart_kb
 )
-await callback.answer()
+
+```
 await state.clear()
+await callback.answer()
+```
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -81,14 +87,22 @@ callback: CallbackQuery,
 state: FSMContext
 ):
 await callback.message.edit_text(
-"📱 Пользуетесь Telegram ежедневно?",
+"""
+📱 Пользуетесь Telegram каждый день?
+
+Это поможет подобрать
+самый быстрый вариант.
+""",
 reply_markup=telegram_kb
 )
+
+```
 await state.set_state(
     DonateWizard.telegram_usage
 )
 
 await callback.answer()
+```
 
 @router.callback_query(
 DonateWizard.donation_type,
@@ -102,15 +116,17 @@ await callback.message.edit_text(
 f"""
 💳 PayPal
 
-Удобный вариант для разового доната.
+Отличный вариант для разового доната.
 
-{PAYPAL_LINK}
+🔗 {PAYPAL_LINK}
 """,
 reply_markup=restart_kb
 )
 
-await callback.answer()
+```
 await state.clear()
+await callback.answer()
+```
 
 @router.callback_query(
 DonateWizard.telegram_usage,
@@ -126,12 +142,15 @@ f"""
 
 Самый быстрый способ поддержки.
 
-{STARS_LINK}
+🔗 {STARS_LINK}
 """,
 reply_markup=restart_kb
 )
-await callback.answer()
+
+```
 await state.clear()
+await callback.answer()
+```
 
 @router.callback_query(
 DonateWizard.telegram_usage,
@@ -145,12 +164,14 @@ await callback.message.edit_text(
 f"""
 💳 PayPal
 
-Удобный вариант для разового доната.
+Для вас это будет наиболее удобный вариант.
 
-{PAYPAL_LINK}
+🔗 {PAYPAL_LINK}
 """,
 reply_markup=restart_kb
 )
 
-await callback.answer()
+```
 await state.clear()
+await callback.answer()
+```
