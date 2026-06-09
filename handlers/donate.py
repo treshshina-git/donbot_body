@@ -1,196 +1,171 @@
-from aiogram import Router
-from aiogram import F
+# handlers/donate.py
 
-from aiogram.types import Message
-from aiogram.types import CallbackQuery
-
+from aiogram import Router, F
+from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
-
 from aiogram.fsm.context import FSMContext
 
 from states.donate_states import DonateWizard
-
 from keyboards.donate_kb import (
-    donation_type_kb,
-    telegram_kb
+donation_type_kb,
+telegram_kb
 )
 
 from config import (
-    PATREON_LINK,
-    PAYPAL_LINK,
-    STARS_LINK
+PATREON_LINK,
+PAYPAL_LINK,
+STARS_LINK
 )
 
 router = Router()
 
-
-@router.message(Command("support"))
-async def support(message: Message):
-
-    await message.answer(
-        f"""
-❤️ Patreon
-{PATREON_LINK}
-
-💳 PayPal
-{PAYPAL_LINK}
-
-⭐ Stars
-{STARS_LINK}
-"""
-    )
-
-
-@router.message(Command("why"))
-async def why(message: Message):
-
-    await message.answer(
-        """
-🎉 Каждый донат помогает:
-
-• оплачивать Railway
-• оплачивать API
-• выпускать новый контент
-• развивать проект
-"""
-    )
-
-
 @router.message(Command("donate"))
 async def donate(
-    message: Message,
-    state: FSMContext
+message: Message,
+state: FSMContext
 ):
+await message.answer(
+"🧭 Какой вариант вам ближе?",
+reply_markup=donation_type_kb
+)
 
-    await message.answer(
-        "Какой вариант вам ближе?",
-        reply_markup=donation_type_kb
-    )
-
-    await state.set_state(
-        DonateWizard.donation_type
-    )
-
+```
+await state.set_state(
+    DonateWizard.donation_type
+)
+```
 
 @router.callback_query(
-    F.data == "start_donate"
+F.data == "start_donate"
 )
 async def start_button(
-    callback: CallbackQuery,
-    state: FSMContext
+callback: CallbackQuery,
+state: FSMContext
 ):
+await callback.message.edit_text(
+"🧭 Какой вариант вам ближе?",
+reply_markup=donation_type_kb
+)
 
-    await callback.message.answer(
-        "Какой вариант вам ближе?",
-        reply_markup=donation_type_kb
-    )
+```
+await state.set_state(
+    DonateWizard.donation_type
+)
 
-    await state.set_state(
-        DonateWizard.donation_type
-    )
-
+await callback.answer()
+```
 
 @router.callback_query(
-    DonateWizard.donation_type,
-    F.data == "regular"
+DonateWizard.donation_type,
+F.data == "regular"
 )
 async def regular(
-    callback: CallbackQuery,
-    state: FSMContext
+callback: CallbackQuery,
+state: FSMContext
 ):
-
-    await callback.message.answer(
-        f"""
+await callback.message.edit_text(
+f"""
 ❤️ Patreon
 
 Лучший вариант для регулярной поддержки.
 
 {PATREON_LINK}
-"""
-    )
+""",
+reply_markup=None
+)
 
-    await state.clear()
-
+```
+await callback.answer()
+await state.clear()
+```
 
 @router.callback_query(
-    DonateWizard.donation_type,
-    F.data == "fast"
+DonateWizard.donation_type,
+F.data == "fast"
 )
 async def fast(
-    callback: CallbackQuery,
-    state: FSMContext
+callback: CallbackQuery,
+state: FSMContext
 ):
+await callback.message.edit_text(
+"📱 Пользуетесь Telegram ежедневно?",
+reply_markup=telegram_kb
+)
 
-    await callback.message.answer(
-        "Пользуетесь Telegram ежедневно?",
-        reply_markup=telegram_kb
-    )
+```
+await state.set_state(
+    DonateWizard.telegram_usage
+)
 
-    await state.set_state(
-        DonateWizard.telegram_usage
-    )
-
+await callback.answer()
+```
 
 @router.callback_query(
-    DonateWizard.donation_type,
-    F.data == "thanks"
+DonateWizard.donation_type,
+F.data == "thanks"
 )
 async def thanks(
-    callback: CallbackQuery,
-    state: FSMContext
+callback: CallbackQuery,
+state: FSMContext
 ):
+await callback.message.edit_text(
+f"""
+💳 PayPal
 
-    await callback.message.answer(
-        f"""
-💳 Для разовой благодарности
-отлично подойдёт PayPal.
+Удобный вариант для разового доната.
 
 {PAYPAL_LINK}
-"""
-    )
+""",
+reply_markup=None
+)
 
-    await state.clear()
-
+```
+await callback.answer()
+await state.clear()
+```
 
 @router.callback_query(
-    DonateWizard.telegram_usage,
-    F.data == "tg_yes"
+DonateWizard.telegram_usage,
+F.data == "tg_yes"
 )
 async def tg_yes(
-    callback: CallbackQuery,
-    state: FSMContext
+callback: CallbackQuery,
+state: FSMContext
 ):
-
-    await callback.message.answer(
-        f"""
+await callback.message.edit_text(
+f"""
 ⭐ Telegram Stars
 
 Самый быстрый способ поддержки.
 
 {STARS_LINK}
 """
-    )
+)
 
-    await state.clear()
-
+```
+await callback.answer()
+await state.clear()
+```
 
 @router.callback_query(
-    DonateWizard.telegram_usage,
-    F.data == "tg_no"
+DonateWizard.telegram_usage,
+F.data == "tg_no"
 )
 async def tg_no(
-    callback: CallbackQuery,
-    state: FSMContext
+callback: CallbackQuery,
+state: FSMContext
 ):
-
-    await callback.message.answer(
-        f"""
+await callback.message.edit_text(
+f"""
 💳 PayPal
 
 Удобный вариант для разового доната.
 
 {PAYPAL_LINK}
 """
-    )
+)
 
-    await state.clear()
+```
+await callback.answer()
+await state.clear()
+```
