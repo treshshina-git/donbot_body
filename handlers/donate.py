@@ -26,7 +26,7 @@ state: FSMContext
 ):
 await message.answer(
 "🧭 Какой вариант вам ближе?",
-reply_markup=donation_type_kb
+reply_markup=restart_kb
 )
 
 ```
