@@ -1,5 +1,3 @@
-# handlers/donate.py
-
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
@@ -26,7 +24,7 @@ state: FSMContext
 ):
 await message.answer(
 "🧭 Какой вариант вам ближе?",
-reply_markup=restart_kb
+reply_markup=donation_type_kb
 )
 
 ```
@@ -44,7 +42,7 @@ state: FSMContext
 ):
 await callback.message.edit_text(
 "🧭 Какой вариант вам ближе?",
- reply_markup=restart_kb
+reply_markup=donation_type_kb
 )
 
 ```
@@ -71,7 +69,7 @@ f"""
 
 {PATREON_LINK}
 """,
-reply_markup=restart_kb
+reply_markup=None
 )
 
 ```
@@ -89,7 +87,7 @@ state: FSMContext
 ):
 await callback.message.edit_text(
 "📱 Пользуетесь Telegram ежедневно?",
-reply_markup=restart_kb
+reply_markup=telegram_kb
 )
 
 ```
@@ -116,7 +114,7 @@ f"""
 
 {PAYPAL_LINK}
 """,
-reply_markup=restart_kb
+reply_markup=None
 )
 
 ```
