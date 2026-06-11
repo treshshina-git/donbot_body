@@ -33,7 +33,7 @@ async def send_rom(callback: CallbackQuery):
 
     raw_url = (
         f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/"
-        f"ROMs%20for%20Play/{console.replace(' ', '%20')}/{filename}"
+        f"ROMS/{console.replace(' ', '%20')}/{filename}"
     )
 
     await callback.message.answer_document(
