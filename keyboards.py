@@ -2,7 +2,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 def consoles_kb():
     kb = InlineKeyboardBuilder()
-    for c in ("NINTENDO", "SUPERNINTENDO", "SEGA"):
+    for c in ("Nintendo", "Super Nintendo", "SEGA"):
         kb.button(text=c, callback_data=f"console:{c}")
     kb.adjust(1)
     return kb.as_markup()
