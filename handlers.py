@@ -51,12 +51,12 @@ async def send_rom(callback: CallbackQuery):
     )
 
    try:
-    await callback.message.answer_document(
-        URLInputFile(raw_url),
-        caption=filename
-    )
+       await callback.message.answer_document(
+           URLInputFile(raw_url),
+           caption=filename
+       )
 
    except (ClientResponseError, ClientError, TelegramBadRequest):
-    await callback.message.answer("❌ ROM недоступен или не найден")
+       await callback.message.answer("❌ ROM недоступен или не найден")
 
     await callback.answer()
