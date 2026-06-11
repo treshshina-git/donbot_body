@@ -4,7 +4,11 @@ from aiogram.types import Message, CallbackQuery, URLInputFile
 
 from keyboards import consoles_kb, files_kb
 from github_api import get_files, OWNER, REPO
-
+from keyboards import (
+    consoles_kb,
+    files_kb,
+    FILES_CACHE
+)
 router = Router()
 
 @router.message(CommandStart())
@@ -29,11 +33,17 @@ async def choose_console(callback: CallbackQuery):
 
 @router.callback_query(F.data.startswith("rom:"))
 async def send_rom(callback: CallbackQuery):
-    _, console, filename = callback.data.split(":", 2)
+
+    file_id = callback.data.split(":")[1]
+
+    console, filename = FILES_CACHE[
+        callback.from_user.id
+    ][file_id]
 
     raw_url = (
-        f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/"
-        f"ROMs%20for%20Play/{console.replace(' ', '%20')}/{filename}"
+        f"https://raw.githubusercontent.com/"
+        f"{OWNER}/{REPO}/main/"
+        f"ROMS/{console}/{filename}"
     )
 
     await callback.message.answer_document(
