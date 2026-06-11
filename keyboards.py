@@ -31,7 +31,7 @@ def files_kb(user_id, console, files):
         )
 
     kb.button(
-        text="⬅️ Back",
+        text="🔙 Назад",
         callback_data="back"
     )
 
