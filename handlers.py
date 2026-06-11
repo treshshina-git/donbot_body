@@ -27,7 +27,11 @@ async def choose_console(callback: CallbackQuery):
 
     await callback.message.edit_text(
         f"📂 {console}",
-        reply_markup=files_kb(console, files)
+        reply_markup=files_kb(
+            callback.from_user.id,
+            console,
+            files
+        )
     )
     await callback.answer()
 
