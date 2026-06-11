@@ -9,7 +9,6 @@ dp.include_router(router)
 async def main():
     bot = Bot(BOT_TOKEN)
     try:
-        print("Bot started")
         await dp.start_polling(bot)
     finally:
         await bot.session.close()
