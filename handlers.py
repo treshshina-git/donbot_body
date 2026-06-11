@@ -49,14 +49,12 @@ async def send_rom(callback: CallbackQuery):
         f"{OWNER}/{REPO}/main/"
         f"ROMs%20for%20Play/{console}/{filename}"
     )
-
-   try:
-       await callback.message.answer_document(
-           URLInputFile(raw_url),
-           caption=filename
-       )
-
-   except (ClientResponseError, ClientError, TelegramBadRequest):
-       await callback.message.answer("❌ ROM недоступен или не найден")
+    try:
+        await callback.message.answer_document(
+            URLInputFile(raw_url),
+            caption=filename
+        )
+    except (ClientResponseError, ClientError, TelegramBadRequest):
+        await callback.message.answer("❌ ROM недоступен или не найден")
 
     await callback.answer()
