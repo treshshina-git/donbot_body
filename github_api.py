@@ -2,7 +2,7 @@ import aiohttp
 
 OWNER = "treshshina-git"
 REPO = "donbot_body"
-ROOT_FOLDER = "ROMs for Play"
+ROOT_FOLDER = "ROMS"
 
 
 async def get_files(folder: str):
