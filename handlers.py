@@ -1,14 +1,13 @@
 from aiogram import Router, F
 from aiogram.filters import CommandStart
 from aiogram.types import Message, CallbackQuery, URLInputFile
-
-from keyboards import consoles_kb, files_kb
-from github_api import get_files, OWNER, REPO
 from keyboards import (
     consoles_kb,
     files_kb,
     FILES_CACHE
 )
+from github_api import get_files, OWNER, REPO
+
 router = Router()
 
 @router.message(CommandStart())
