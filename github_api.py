@@ -1,20 +1,14 @@
 import aiohttp
-from urllib.parse import quote
 
 OWNER = "treshshina-git"
 REPO = "donbot_body"
-
+ROOT_FOLDER = "ROMs for Play"
 
 async def get_files(folder: str):
-    url = (
-        "https://api.github.com/repos/"
-        "treshshina-git/donbot_body/contents"
-    )
+    url = f"https://api.github.com/repos/{OWNER}/{REPO}/contents/{ROOT_FOLDER}/{folder}"
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
             data = await resp.json()
 
-    print(data)
-
-    return []
+    return [x["name"] for x in data if x["type"] == "file"]
