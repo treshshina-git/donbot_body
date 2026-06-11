@@ -42,7 +42,7 @@ async def send_rom(callback: CallbackQuery):
     console, filename = FILES_CACHE[
         callback.from_user.id
     ][file_id]
-https://github.com/treshshina-git/donbot_body/raw/refs/heads/main/ROMs%20for%20Play/NES/Alien3.zip
+
     raw_url = (
         f"https://raw.githubusercontent.com/"
         f"{OWNER}/{REPO}/main/"
