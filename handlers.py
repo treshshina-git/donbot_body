@@ -13,11 +13,11 @@ router = Router()
 
 @router.message(CommandStart())
 async def start(message: Message):
-    await message.answer("🎮 Choose a console:", reply_markup=consoles_kb())
+    await message.answer("🎮 Выберите приставку:", reply_markup=consoles_kb())
 
 @router.callback_query(F.data == "back")
 async def back(callback: CallbackQuery):
-    await callback.message.edit_text("🎮 Choose a console:", reply_markup=consoles_kb())
+    await callback.message.edit_text("🎮 Выберите приставку:", reply_markup=consoles_kb())
     await callback.answer()
 
 @router.callback_query(F.data.startswith("console:"))
@@ -26,7 +26,7 @@ async def choose_console(callback: CallbackQuery):
     files = await get_files(console)
 
     await callback.message.edit_text(
-        f"📂 {console}",
+        f"🕹️ {console}",
         reply_markup=files_kb(
             callback.from_user.id,
             console,
