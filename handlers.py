@@ -1,0 +1,44 @@
+from aiogram import Router, F
+from aiogram.filters import CommandStart
+from aiogram.types import Message, CallbackQuery, URLInputFile
+
+from keyboards import consoles_kb, files_kb
+from github_api import get_files, OWNER, REPO
+
+router = Router()
+
+@router.message(CommandStart())
+async def start(message: Message):
+    await message.answer("🎮 Choose a console:", reply_markup=consoles_kb())
+
+@router.callback_query(F.data == "back")
+async def back(callback: CallbackQuery):
+    await callback.message.edit_text("🎮 Choose a console:", reply_markup=consoles_kb())
+    await callback.answer()
+
+@router.callback_query(F.data.startswith("console:"))
+async def choose_console(callback: CallbackQuery):
+    console = callback.data.split(":", 1)[1]
+    files = await get_files(console)
+
+    await callback.message.edit_text(
+        f"📂 {console}",
+        reply_markup=files_kb(console, files)
+    )
+    await callback.answer()
+
+@router.callback_query(F.data.startswith("rom:"))
+async def send_rom(callback: CallbackQuery):
+    _, console, filename = callback.data.split(":", 2)
+
+    raw_url = (
+        f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main/"
+        f"ROMs%20for%20Play/{console.replace(' ', '%20')}/{filename}"
+    )
+
+    await callback.message.answer_document(
+        URLInputFile(raw_url),
+        caption=filename
+    )
+
+    await callback.answer()
